@@ -13,7 +13,7 @@ const processError = ({response}) => {
 };
 
 const HttpClient = axios.create({
-    baseURL: process.env.REACT_APP_APIGATEWAY_URL,
+    baseURL: process.env.REACT_APP_WEATHER_API_URL,
     headers: {
         'Content-Type': 'application/json'
     },
