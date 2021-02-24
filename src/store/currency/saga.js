@@ -1,28 +1,22 @@
-import { call, put, select, takeLatest } from "redux-saga/effects";
-import { get, isObject } from 'lodash'
+import {call, put} from "redux-saga/effects";
 import apiMethods from "../../api/apiMethods";
+import {setCurrencyRate} from "./actions";
 
-const RESOURCE = 'currency';
-
-function* fetchCurrencyRate(props, { payload }) {
-  // const { globalActions: { enqueueSnackbar } } = props;
-  //
-  // try {
-  //   if (id) {
-  //     const { data } = yield call(apiMethods.get, `${RESOURCE}/${id}`);
-  //
-  //     yield put(setItem(data));
-  //   } else {
-  //     yield put(setItem({ active: true }));
-  //   }
-  // } catch (error) {
-  //   yield put(enqueueSnackbar({
-  //     message: error.toString(),
-  //     options: { variant: 'error' },
-  //   }));
-  // }
+function* fetchCurrencyRate(props) {
+    const {globalActions: {enqueueSnackbar, setLoading}} = props;
+    yield setLoading(true)
+    try {
+        const data = yield call(apiMethods.getCurrency);
+        yield put(setCurrencyRate(data));
+        yield setLoading(false)
+    } catch (error) {
+        yield put(enqueueSnackbar({
+            message: error.toString(),
+            options: {variant: 'error'},
+        }));
+    }
 }
 
 export default function* sagaWatcher(props) {
-  yield call(fetchCurrencyRate, props);
+    yield call(fetchCurrencyRate, props);
 }

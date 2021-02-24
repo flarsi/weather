@@ -31,11 +31,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
 }
 
 const createReducer = () => combineReducers({
+    rootReducer,
     loadingManager: loadingManagerReducer,
     notifications,
     weatherReducer,
     currencyReducer,
-    rootReducer
 })
 
 export default createReducer
