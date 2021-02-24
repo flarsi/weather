@@ -2,8 +2,11 @@ import React from "react";
 import {LoadingProvider} from "./modules/loadingManager/loadingContext";
 import Notifier from "./modules/notifier";
 import {SnackbarProvider} from "notistack";
+import {connect} from "react-redux";
+import {fetchWeather} from "./store/weather/actions";
 
-function App() {
+function App({fetchWeather}) {
+    fetchWeather("München")
     return (
         <div className="App">
             <SnackbarProvider
@@ -23,4 +26,8 @@ function App() {
     );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+    fetchWeather: city => dispatch(fetchWeather(city)),
+})
+
+export default connect(null, mapDispatchToProps)(App);

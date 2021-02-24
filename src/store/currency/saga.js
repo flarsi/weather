@@ -2,7 +2,7 @@ import {call, put} from "redux-saga/effects";
 import apiMethods from "../../api/apiMethods";
 import {setCurrencyRate} from "./actions";
 
-function* fetchCurrencyRate(props) {
+export function* fetchCurrencyRate(props) {
     const {globalActions: {enqueueSnackbar, setLoading}} = props;
     yield setLoading(true)
     try {

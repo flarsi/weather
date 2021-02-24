@@ -1,4 +1,4 @@
-import {LOAD_WEATHER, SET_WEATHER} from "./actions/actionTypes";
+import {FETCH_WEATHER, SET_WEATHER} from "./actions/actionTypes";
 
 const initialState = {
   fetching: true,
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOAD_WEATHER:
+    case FETCH_WEATHER:
       return {
         ...state,
         fetching: true

@@ -1,51 +1,26 @@
-import { call, put, select, takeLatest } from "redux-saga/effects";
-import { get, isObject } from 'lodash'
+import {call, put, takeLatest} from "redux-saga/effects";
 import apiMethods from "../../api/apiMethods";
-import {LOAD_WEATHER} from "./actions/actionTypes";
+import {FETCH_WEATHER} from "./actions/actionTypes";
+import {setWeather} from "./actions";
 
-const RESOURCE = 'weather';
+const RESOURCE = 'forecast';
 
-function* fetchFavoriteWeather(props) {
-  // const { globalActions: { enqueueSnackbar } } = props;
-  //
-  // try {
-  //   if (id) {
-  //     const { data } = yield call(apiMethods.get, `${RESOURCE}/${id}`);
-  //
-  //     yield put(setItem(data));
-  //   } else {
-  //     yield put(setItem({ active: true }));
-  //   }
-  // } catch (error) {
-  //   yield put(enqueueSnackbar({
-  //     message: error.toString(),
-  //     options: { variant: 'error' },
-  //   }));
-  // }
-}
-
-
-function* fetchWeather(props, { payload }) {
-  // const { globalActions: { enqueueSnackbar } } = props;
-  //
-  // try {
-  //   if (id) {
-  //     const { data } = yield call(apiMethods.get, `${RESOURCE}/${id}`);
-  //
-  //     yield put(setItem(data));
-  //   } else {
-  //     yield put(setItem({ active: true }));
-  //   }
-  // } catch (error) {
-  //   yield put(enqueueSnackbar({
-  //     message: error.toString(),
-  //     options: { variant: 'error' },
-  //   }));
-  // }
+function* fetchWeather(props) {
+    console.log('test')
+    const {globalActions: {enqueueSnackbar, setLoading}} = props;
+    yield setLoading(true)
+    try {
+        const data = yield call(apiMethods.get, RESOURCE, {q: "München", appid: process.env.REACT_APP_WEATHER_API_KEY});
+        yield put(setWeather(data));
+        yield setLoading(false)
+    } catch (error) {
+        yield put(enqueueSnackbar({
+            message: error.toString(),
+            options: {variant: 'error'},
+        }));
+    }
 }
 
 export default function* sagaWatcher(props) {
-  yield call(fetchFavoriteWeather, props);
-
-  yield takeLatest(LOAD_WEATHER, fetchWeather, props);
+    yield takeLatest(FETCH_WEATHER, fetchWeather, props);
 }
