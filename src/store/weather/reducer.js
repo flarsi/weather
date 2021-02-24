@@ -1,8 +1,9 @@
-import {FETCH_WEATHER, SET_WEATHER} from "./actions/actionTypes";
+import {FETCH_WEATHER, SET_FAVORITE_WEATHER, SET_WEATHER} from "./actions/actionTypes";
 
 const initialState = {
   fetching: true,
-  item: {}
+  item: {},
+  favorite:[]
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -17,6 +18,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         fetching: false,
         item: payload
+      };
+    case SET_FAVORITE_WEATHER:
+      return {
+        ...state,
+        favorite: payload
       };
     default:
       return state;

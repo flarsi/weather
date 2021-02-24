@@ -1,5 +1,4 @@
 import HttpClient from './http-client';
-import currencySaga from "../store/currency/saga";
 
 class APIMethods {
   get(resource, params = {}) {

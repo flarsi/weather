@@ -1,15 +1,9 @@
-import {call, put} from "@redux-saga/core/effects";
-import { fork } from 'redux-saga/effects';
+import {all, call, fork, put} from 'redux-saga/effects';
 import apiMethods from "../api/apiMethods";
 import {setCityList} from "./rootActions";
 
 import weatherSaga from './weather/saga';
 import currencySaga from './currency/saga';
-
-const sagas = [
-    weatherSaga,
-    currencySaga
-]
 
 function* fetchCitiesList(props) {
     const {globalActions: {setLoading, enqueueSnackbar}} = props;
@@ -30,6 +24,8 @@ function* fetchCitiesList(props) {
 export default function* rootSagaWatcher(props) {
     yield call(fetchCitiesList, props)
 
-    yield fork(weatherSaga, props)
-    yield fork(currencySaga, props)
+    yield all([
+        fork(currencySaga, props),
+        fork(weatherSaga, props)
+    ])
 }

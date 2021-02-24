@@ -1,3 +1,4 @@
 export const FETCH_WEATHER = 'FETCH_WEATHER';
 export const SET_WEATHER = 'SET_WEATHER';
+export const SET_FAVORITE_WEATHER = 'SET_FAVORITE_WEATHER';
 
