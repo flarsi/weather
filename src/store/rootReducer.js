@@ -3,8 +3,7 @@ import {SET_CITY_LIST, SET_LOAD} from "./rootActions/actionTypes";
 import loadingManagerReducer from '../modules/loadingManager/reducer';
 import notifications from '../modules/notifier/reducer';
 
-import weatherReducer from "./weather/reducer";
-import currencyReducer from "./currency/reducer";
+import weather from "./weather/reducer";
 
 import {combineReducers} from "redux";
 
@@ -13,7 +12,7 @@ const initialState = {
     cityList: []
 };
 
-const rootReducer = (state = initialState, { type, payload }) => {
+const city = (state = initialState, { type, payload }) => {
     switch (type) {
         case SET_LOAD:
             return {
@@ -31,11 +30,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
 }
 
 const createReducer = () => combineReducers({
-    rootReducer,
+    city,
     loadingManager: loadingManagerReducer,
     notifications,
-    weatherReducer,
-    currencyReducer,
+    weather,
 })
 
 export default createReducer

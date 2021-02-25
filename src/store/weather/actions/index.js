@@ -1,7 +1,12 @@
-import {FETCH_WEATHER, SET_FAVORITE_WEATHER, SET_WEATHER} from "./actionTypes";
+import {FETCH_WEATHER, SET_FULL_WEATHER, SET_WEATHER_PERIOD} from "./actionTypes";
 
 export const setWeather = payload => ({
-    type: SET_WEATHER,
+    type: SET_WEATHER_PERIOD,
+    payload: payload
+});
+
+export const setFullWeather = payload => ({
+    type: SET_FULL_WEATHER,
     payload: payload
 });
 
@@ -10,7 +15,3 @@ export const fetchWeather = city => ({
     payload: city
 });
 
-export const setFavoriteWeather = payload => ({
-    type: SET_FAVORITE_WEATHER,
-    payload: payload
-});

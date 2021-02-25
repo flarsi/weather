@@ -1,30 +1,38 @@
-import {FETCH_WEATHER, SET_FAVORITE_WEATHER, SET_WEATHER} from "./actions/actionTypes";
+import {FETCH_WEATHER, SET_FULL_WEATHER, SET_WEATHER_PERIOD} from "./actions/actionTypes";
 
 const initialState = {
   fetching: true,
-  item: {},
-  favorite:[]
+  item: {
+    period: {},
+    full: {}
+  },
 };
 
-export default (state = initialState, { type, payload }) => {
+ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_WEATHER:
       return {
         ...state,
         fetching: true
       };
-    case SET_WEATHER:
+    case SET_FULL_WEATHER:
+      return {
+        ...state,
+        item: {...state.item,
+          full: payload
+        }
+      };
+    case SET_WEATHER_PERIOD:
       return {
         ...state,
         fetching: false,
-        item: payload
-      };
-    case SET_FAVORITE_WEATHER:
-      return {
-        ...state,
-        favorite: payload
+        item: {...state.item,
+        period: payload
+        }
       };
     default:
       return state;
   }
 };
+
+export default reducer

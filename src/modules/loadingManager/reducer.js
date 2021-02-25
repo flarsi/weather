@@ -1,8 +1,9 @@
+
 const initialState = {
   loading: false
 };
 
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'SET_LOADING':
       return {
@@ -15,3 +16,5 @@ export default (state = initialState, { type, payload }) => {
       }
   }
 };
+
+export default reducer
