@@ -27,7 +27,7 @@ export const FullWeather = ({favorite, setFavorite}) => {
 
     useEffect(() => {
         setLoading(fetching)
-    }, [fetching])
+    }, [fetching, setLoading])
 
     const handleFavorite = () => {
         const favoriteCities = {...favorite}
