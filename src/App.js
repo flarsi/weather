@@ -32,7 +32,7 @@ function App() {
                     <Box component={Grid} container justify="center" direction="row">
                         <Grid container item xs={10}>
                             <Grid item lg={9} md={9} sm={12} xs={12}>
-                                <Box p={2} pt={4} component={Grid} container item xs={12}
+                                <Box p={2} pl={0} pt={4} component={Grid} container item xs={12}
                                      justify="center">
                                     <FullWeather favorite={favorite} setFavorite={setFavorite}/>
                                 </Box>

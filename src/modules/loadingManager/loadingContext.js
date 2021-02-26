@@ -1,15 +1,10 @@
 import React, { createContext } from 'react';
 import { connect } from 'react-redux';
 import { setLoading } from './actions';
-import LoadingScreen from "../../components/LoadingScreen";
 
 const LoadingContext = createContext({});
 
 const Provider = ({ children, loading, setLoading }) => {
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
 
   return (
     <LoadingContext.Provider

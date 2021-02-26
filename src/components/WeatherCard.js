@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Box, Card, CardContent, Grid, makeStyles, Typography} from "@material-ui/core";
 import Icon from "@mdi/react";
 import {mdiGauge, mdiNavigation, mdiTemperatureCelsius, mdiThermometer} from "@mdi/js";
+import {LoadingContext} from "../modules/loadingManager/loadingContext";
 
 const useStyles = makeStyles(theme => ({
         root: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles(theme => ({
 
 export const WeatherCard = ({weather}) => {
     const classes = useStyles()
+    const {loading} = useContext(LoadingContext)
 
     return <Grid container direction="column" item lg={4} md={6} sm={6} xs={12}>
-        {weather?.main &&
+        {weather?.main && !loading ?
         <Card className={classes.root}>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -53,6 +55,8 @@ export const WeatherCard = ({weather}) => {
                 </Typography>
             </CardContent>
         </Card>
+            :
+            <> </>
         }
     </Grid>
 }

@@ -1,7 +1,7 @@
 import {FETCH_WEATHER, SET_FULL_WEATHER, SET_WEATHER_PERIOD} from "./actions/actionTypes";
 
 const initialState = {
-  fetching: true,
+  fetching: false,
   item: {
     period: {},
     full: {}

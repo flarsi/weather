@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {Box, Card, CardContent, CardHeader, Grid, IconButton, makeStyles, Typography} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {mdiThermometer, mdiTemperatureCelsius, mdiNavigation, mdiGauge, mdiStarCheck, mdiStarPlus} from '@mdi/js';
 import Icon from "@mdi/react";
+import {LoadingContext} from "../modules/loadingManager/loadingContext";
+import LoadingScreen from "./LoadingScreen";
 
 const useStyles = makeStyles(theme => ({
         root: {
             backgroundColor: "rgba(255,255,255,0.7)",
-            position: "relative"
+            position: "relative",
         },
         header: {
             position: "absolute",
@@ -19,8 +21,13 @@ const useStyles = makeStyles(theme => ({
 
 export const FullWeather = ({favorite, setFavorite}) => {
     const classes = useStyles()
-    const {full} = useSelector(state => state.weather.item)
+    const {loading, setLoading} = useContext(LoadingContext)
+    const {item: {full}, fetching} = useSelector(state => state.weather)
     var current = new Date();
+
+    useEffect(() => {
+        setLoading(fetching)
+    }, [fetching])
 
     const handleFavorite = () => {
         const favoriteCities = {...favorite}
@@ -35,7 +42,7 @@ export const FullWeather = ({favorite, setFavorite}) => {
     }
 
     return <Grid container direction="column" item lg={4} md={6} sm={8} xs={12}>
-        {full?.main &&
+        {full?.main && !loading ?
         <Card className={classes.root}>
             <CardHeader
                 className={classes.header}
@@ -89,6 +96,8 @@ export const FullWeather = ({favorite, setFavorite}) => {
                 </Typography>
             </CardContent>
         </Card>
+            :
+            full?.main && <LoadingScreen/>
         }
     </Grid>
 }
