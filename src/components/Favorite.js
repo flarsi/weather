@@ -11,7 +11,7 @@ const Favorite = ({fetchWeather, favorite}) => {
 
     return <Grid container spacing={1} direction="column">
         <Typography variant="h4" component="h2" align="center">Favorite cities</Typography>
-        {Object.keys(favorite).map((key, index) =>
+        {favorite && Object.keys(favorite).map((key, index) =>
             <Grid item key={index}>
                 <Button variant="outlined" fullWidth onClick={HandleSearch(key)}>{key}</Button>
             </Grid>
