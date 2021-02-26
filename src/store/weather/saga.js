@@ -18,7 +18,7 @@ function* fetchWeather(props, {payload: city}) {
         yield setLoading(false)
     } catch (error) {
         yield put(enqueueSnackbar({
-            message: error.toString(),
+            message: error.message,
             options: {variant: 'error'},
         }));
     }
