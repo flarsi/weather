@@ -4,9 +4,11 @@ import {fetchWeather} from "../store/weather/actions";
 import {connect} from "react-redux";
 import Icon from "@mdi/react";
 import {mdiStar} from '@mdi/js';
+import {useLocalStorage} from "../services/localStorage";
 
 const MobileFavoriteMenu = ({fetchWeather, ...rest}) => {
-    const favorite = JSON.parse(localStorage.getItem('favorite'))
+    const localStorage = useLocalStorage()
+    const favorite = localStorage.getItem('favorite')
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 

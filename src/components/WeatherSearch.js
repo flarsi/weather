@@ -24,7 +24,7 @@ const WeatherSearch = ({fetchWeather}) => {
     }
 
     const HandleSearch = () => {
-        fetchWeather(city.city)
+        fetchWeather(city?.city)
     }
 
 
@@ -43,7 +43,7 @@ const WeatherSearch = ({fetchWeather}) => {
             />
         </Grid>
         <Grid item xs={1}>
-            <IconButton onClick={HandleSearch}>
+            <IconButton onClick={HandleSearch} disabled={!city?.city}>
                 <Icon path={mdiMagnify}
                       size={1}
                       color="black"

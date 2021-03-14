@@ -5,6 +5,7 @@ import {mdiThermometer, mdiTemperatureCelsius, mdiNavigation, mdiGauge, mdiStarC
 import Icon from "@mdi/react";
 import {LoadingContext} from "../modules/loadingManager/loadingContext";
 import LoadingScreen from "./LoadingScreen";
+import {useLocalStorage} from "../services/localStorage";
 
 const useStyles = makeStyles(theme => ({
         root: {
@@ -20,10 +21,12 @@ const useStyles = makeStyles(theme => ({
 
 
 export const FullWeather = ({favorite, setFavorite}) => {
+    const localStorage = useLocalStorage()
+
     const classes = useStyles()
     const {loading, setLoading} = useContext(LoadingContext)
     const {item: {full}, fetching} = useSelector(state => state.weather)
-    var current = new Date();
+    let current = new Date();
 
     useEffect(() => {
         setLoading(fetching)
@@ -34,10 +37,10 @@ export const FullWeather = ({favorite, setFavorite}) => {
         if(favoriteCities?.[full.name]){
             delete favoriteCities[full.name]
             setFavorite(favoriteCities)
-            localStorage.setItem('favorite', JSON.stringify(favoriteCities));
+            localStorage.setItem('favorite', favoriteCities);
         }else {
             setFavorite({...favoriteCities, [full.name]: true})
-            localStorage.setItem('favorite', JSON.stringify({...favoriteCities, [full.name]: true}));
+            localStorage.setItem('favorite', {...favoriteCities, [full.name]: true});
         }
     }
 
